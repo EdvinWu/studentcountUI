@@ -24,8 +24,8 @@ function drawUserList() {
     });
 }
 
-function postStudent(){
-    //event.preventDefault();
+function postStudent(event){
+    event.preventDefault();
     fetch('http://localhost:8080/students',{
         method: 'POST',
         headers:{
@@ -33,7 +33,8 @@ function postStudent(){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(createStudent())
-        });
+        }).then(drawUserList);
+
 }
 
 function createStudent(){
