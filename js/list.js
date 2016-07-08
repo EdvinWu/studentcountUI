@@ -18,11 +18,30 @@ function drawUserList() {
         var userList = userListTemplate({
             body: userList
         });
-
         var userListContainer = document.createElement('div');
         userListContainer.innerHTML = userList;
         document.body.appendChild(userListContainer);
     });
 }
 
+function postStudent(){
+    //event.preventDefault();
+    fetch('http://localhost:8080/students',{
+        method: 'POST',
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(createStudent())
+        });
+}
+
+function createStudent(){
+    var formName = document.user.name.value;
+    var formSurname = document.user.surname.value;
+    console.log(formName);
+    console.log(formSurname);
+
+    return {name:formName, surname:formSurname};
+}
 drawUserList();
