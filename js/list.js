@@ -33,7 +33,7 @@ function postStudent(event){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(createStudent())
-        }).then(drawUserList);
+        }).then(location.reload());
 
 }
 
