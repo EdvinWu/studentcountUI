@@ -1,0 +1,30 @@
+span.button{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+span.listElement{
+    padding-left: 5px;
+}
+
+html, body {
+    height:100%;
+}
+
+html {
+    display:table; width:100%;
+}
+
+body {
+    display:table-cell;
+    text-align:center;
+    vertical-align:top;
+
+}
+
+form{
+    padding-bottom: 25px;
+}
+
+div{
+    padding-left: 10px;
+}
