@@ -1,17 +1,17 @@
 function loadUsers() {
     return fetch('http://localhost:8080/students')
-        .then(function(response) {
+        .then(function (response) {
             return response.json();
         });
 }
 
 function drawUserList() {
-    loadUsers().then(function(users) {
+    loadUsers().then(function (users) {
         var userListTemplate = Handlebars.compile(document.querySelector('#user-list').innerHTML);
         var userTemplate = Handlebars.compile(document.querySelector('#user').innerHTML);
 
         var userList = '';
-        users.forEach(function(user) {
+        users.forEach(function (user) {
             userList += userTemplate(user);
         });
 
@@ -20,29 +20,33 @@ function drawUserList() {
         });
         var userListContainer = document.createElement('div');
         userListContainer.innerHTML = userList;
-        document.body.appendChild(userListContainer);
+        document.querySelector(".list").appendChild(userListContainer);
     });
 }
 
-function postStudent(event){
+function postStudent(event) {
     event.preventDefault();
-    fetch('http://localhost:8080/students',{
+    fetch('http://localhost:8080/students', {
         method: 'POST',
-        headers:{
+        headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(createStudent())
-        }).then(location.reload());
+    }).then(function () {
+        var qs = document.querySelector(".list");
+        qs.removeChild(qs.lastElementChild);
+        drawUserList();
+    });
 
 }
 
-function createStudent(){
+function createStudent() {
     var formName = document.user.name.value;
     var formSurname = document.user.surname.value;
     console.log(formName);
     console.log(formSurname);
 
-    return {name:formName, surname:formSurname};
+    return {name: formName, surname: formSurname};
 }
 drawUserList();
