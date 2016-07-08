@@ -21,6 +21,7 @@ function drawUserList() {
         var userListContainer = document.createElement('div');
         userListContainer.innerHTML = userList;
         document.querySelector(".list").appendChild(userListContainer);
+
     });
 }
 
@@ -48,5 +49,19 @@ function createStudent() {
     console.log(formSurname);
 
     return {name: formName, surname: formSurname};
+}
+function deleteStudent(id){
+    fetch('http://localhost:8080/students/'+id, {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }).then(function () {
+        var qs = document.querySelector(".list");
+        qs.removeChild(qs.lastElementChild);
+        drawUserList();
+    });
+    console.log(id);
 }
 drawUserList();
